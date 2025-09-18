@@ -28,9 +28,33 @@ import {
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
+interface Activity {
+  title?: string;
+  status?: string;
+  partnerSchedule?: string;
+}
+
+interface Meeting {
+  partner?: string;
+  date?: string;
+  time?: string;
+  topic?: string;
+  status?: string;
+}
+
+interface DashboardData {
+  connections: number;
+  activeNeeds: number;
+  trustScore: number;
+  storeStatus: string;
+  recentActivities?: Activity[];
+  upcomingMeetings?: Meeting[];
+  upcomingEvents?: string[];
+}
+
 export default function DashboardContent() {
   const router = useRouter();
-  const [dashboardData, setDashboardData] = useState<any>(null);
+  const [dashboardData, setDashboardData] = useState<DashboardData | null>(null);
 
   useEffect(() => {
     fetchDashboardData();
@@ -222,7 +246,7 @@ export default function DashboardContent() {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {dashboardData.recentActivities?.map((activity: any, index: number) => (
+                  {dashboardData.recentActivities?.map((activity: Activity, index: number) => (
                     <TableRow key={index}>
                       <TableCell>{activity.title || `Activity ${index + 1}`}</TableCell>
                       <TableCell>
@@ -276,7 +300,7 @@ export default function DashboardContent() {
               Meeting Schedule
             </Typography>
             <Box sx={{ maxHeight: 400, overflowY: 'auto' }}>
-              {dashboardData.upcomingMeetings?.map((meeting: any, index: number) => (
+              {dashboardData.upcomingMeetings?.map((meeting: Meeting, index: number) => (
                 <Box key={index} sx={{ mb: 2, p: 2, bgcolor: 'background.default', borderRadius: 1, borderLeft: 3, borderColor: 'primary.main' }}>
                   <Typography variant="body2" fontWeight="bold">
                     {meeting.partner || `Partner ${index + 1}`}

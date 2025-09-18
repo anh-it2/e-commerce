@@ -32,6 +32,11 @@ import {
 
 const drawerWidth = 280;
 
+interface User {
+  userID: string;
+  companyCode: string;
+}
+
 interface DashboardLayoutProps {
   children: React.ReactNode;
 }
@@ -39,7 +44,7 @@ interface DashboardLayoutProps {
 export default function DashboardLayout({ children }: DashboardLayoutProps) {
   const router = useRouter();
   const pathname = usePathname();
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState<User | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {

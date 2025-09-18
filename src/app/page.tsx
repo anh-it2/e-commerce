@@ -22,9 +22,14 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import AuthModal from './components/AuthModal';
 
+interface User {
+  userID: string;
+  companyCode: string;
+}
+
 export default function Home() {
   const [authModalOpen, setAuthModalOpen] = useState(false);
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState<User | null>(null);
   const router = useRouter();
 
   useEffect(() => {
@@ -34,7 +39,7 @@ export default function Home() {
     }
   }, []);
 
-  const handleLoginSuccess = (userData: any) => {
+  const handleLoginSuccess = (userData: User) => {
     setUser(userData);
     localStorage.setItem('user', JSON.stringify(userData));
     router.push('/dashboard');

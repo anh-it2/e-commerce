@@ -36,10 +36,21 @@ import {
 
 import { useEffect, useState } from 'react';
 
+interface CompanyData {
+  name: string;
+  address: string;
+  phone: string;
+  email: string;
+  website: string;
+  employees: string;
+  sector: string;
+  description: string;
+}
+
 export default function CompanyInfo() {
-  const [companyData, setCompanyData] = useState<any>(null);
+  const [companyData, setCompanyData] = useState<CompanyData | null>(null);
   const [editMode, setEditMode] = useState(false);
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<CompanyData>({
     name: '',
     address: '',
     phone: '',

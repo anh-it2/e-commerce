@@ -39,15 +39,26 @@ import {
 
 import { useEffect, useState } from 'react';
 
+interface Partner {
+  id: string;
+  name: string;
+  industry?: string;
+  location?: string;
+  rating?: number;
+  description?: string;
+  companySize?: string;
+  trustScore?: number;
+}
+
 export default function PartnerSearch() {
-  const [partners, setPartners] = useState<any[]>([]);
+  const [partners, setPartners] = useState<Partner[]>([]);
   const [filters, setFilters] = useState({
     industry: '',
     distance: 100,
     rating: 0
   });
   const [chatDialog, setChatDialog] = useState(false);
-  const [selectedPartner, setSelectedPartner] = useState<any>(null);
+  const [selectedPartner, setSelectedPartner] = useState<Partner | null>(null);
   const [message, setMessage] = useState('');
 
   useEffect(() => {
@@ -69,7 +80,7 @@ export default function PartnerSearch() {
     }
   };
 
-  const handleConnect = (partner: any) => {
+  const handleConnect = (partner: Partner) => {
     setSelectedPartner(partner);
     setChatDialog(true);
   };

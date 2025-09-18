@@ -41,9 +41,44 @@ import {
   ArrowBack
 } from '@mui/icons-material';
 
+interface Company {
+  id: string;
+  name: string;
+  verified?: boolean;
+  sector: string;
+  products: string[];
+  location: string;
+  rating: number;
+  partnerSchedule?: string;
+}
+
+interface BusinessNeed {
+  id: string;
+  type: 'buy' | 'sell' | 'partnership';
+  title: string;
+  company: string;
+  quantity: string;
+  location: string;
+  status: string;
+  postedDate: string;
+}
+
+interface FeaturedProduct {
+  id: string;
+  name: string;
+  company?: string;
+  price?: string;
+}
+
+interface MarketplaceData {
+  companies?: Company[];
+  latestNeeds?: BusinessNeed[];
+  featuredProducts?: FeaturedProduct[];
+}
+
 export default function Marketplace() {
   const router = useRouter();
-  const [marketplaceData, setMarketplaceData] = useState<any>(null);
+  const [marketplaceData, setMarketplaceData] = useState<MarketplaceData | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedSector, setSelectedSector] = useState('');
   const [minRating, setMinRating] = useState('');
@@ -199,7 +234,7 @@ export default function Marketplace() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {marketplaceData.companies?.slice(0, 6).map((company: any) => (
+              {marketplaceData.companies?.slice(0, 6).map((company: Company) => (
                 <TableRow key={company.id}>
                   <TableCell>
                     <Box sx={{ display: 'flex', alignItems: 'center' }}>
@@ -258,7 +293,7 @@ export default function Marketplace() {
           Latest Business Needs
         </Typography>
         <Grid container spacing={3} sx={{ mb: 4 }}>
-          {marketplaceData.latestNeeds?.map((need: any) => (
+          {marketplaceData.latestNeeds?.map((need: BusinessNeed) => (
             <Grid item xs={12} md={6} key={need.id}>
               <Card>
                 <CardContent>
@@ -310,7 +345,7 @@ export default function Marketplace() {
           Featured Products
         </Typography>
         <Grid container spacing={3}>
-          {marketplaceData.featuredProducts?.map((product: any) => (
+          {marketplaceData.featuredProducts?.map((product: FeaturedProduct) => (
             <Grid item xs={12} sm={6} md={4} key={product.id}>
               <Card>
                 <CardMedia

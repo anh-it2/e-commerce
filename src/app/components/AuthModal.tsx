@@ -28,10 +28,15 @@ import {
   Login as LoginIcon
 } from '@mui/icons-material';
 
+interface User {
+  companyCode: string;
+  userID: string;
+}
+
 interface AuthModalProps {
   open: boolean;
   onClose: () => void;
-  onLoginSuccess: (user: any) => void;
+  onLoginSuccess: (user: User) => void;
 }
 
 interface TabPanelProps {

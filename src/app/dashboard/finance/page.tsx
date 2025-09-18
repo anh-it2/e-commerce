@@ -36,10 +36,23 @@ import {
 
 import { useEffect, useState } from 'react';
 
+interface FinancialService {
+  id: string;
+  name: string;
+  category: string;
+  description: string;
+  provider: string;
+  rate: string;
+  maxAmount: string;
+  processingTime: string;
+  partnerSchedule?: string;
+  status: string;
+}
+
 export default function FinancialServices() {
-  const [services, setServices] = useState<any[]>([]);
+  const [services, setServices] = useState<FinancialService[]>([]);
   const [applicationDialog, setApplicationDialog] = useState(false);
-  const [selectedService, setSelectedService] = useState<any>(null);
+  const [selectedService, setSelectedService] = useState<FinancialService | null>(null);
   const [applicationForm, setApplicationForm] = useState({
     amount: '',
     purpose: '',
@@ -61,7 +74,7 @@ export default function FinancialServices() {
     }
   };
 
-  const handleApply = (service: any) => {
+  const handleApply = (service: FinancialService) => {
     setSelectedService(service);
     setApplicationDialog(true);
   };
@@ -129,7 +142,7 @@ export default function FinancialServices() {
                       </Typography>
                       <Chip
                         label={service.category.toUpperCase()}
-                        color={getCategoryColor(service.category) as any}
+                        color={getCategoryColor(service.category) as 'primary' | 'success' | 'info' | 'warning' | 'default'}
                         size="small"
                       />
                       <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
@@ -183,7 +196,7 @@ export default function FinancialServices() {
         <DialogContent>
           <Box sx={{ mt: 2 }}>
             <Alert severity="info" sx={{ mb: 3 }}>
-              This is a demo application. In a real system, this would connect to the financial provider's API.
+              This is a demo application. In a real system, this would connect to the financial provider&apos;s API.
             </Alert>
 
             <Grid container spacing={2}>

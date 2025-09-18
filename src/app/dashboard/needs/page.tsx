@@ -61,12 +61,29 @@ const hsCodeSuggestions = [
   { product: 'Cement', code: '2523.29.00' }
 ];
 
+interface BusinessNeed {
+  product?: string;
+  quantity?: string;
+  unit?: string;
+  price?: string;
+  currency?: string;
+  type?: string;
+  status?: string;
+  partnerSchedule?: string;
+}
+
+interface SubmissionResult {
+  success: boolean;
+  message?: string;
+  needId?: string;
+}
+
 export default function PostBusinessNeed() {
   const router = useRouter();
   const [activeStep, setActiveStep] = useState(0);
   const [loading, setLoading] = useState(false);
-  const [submissionResult, setSubmissionResult] = useState<any>(null);
-  const [existingNeeds, setExistingNeeds] = useState<any[]>([]);
+  const [submissionResult, setSubmissionResult] = useState<SubmissionResult | null>(null);
+  const [existingNeeds, setExistingNeeds] = useState<BusinessNeed[]>([]);
   const [showExisting, setShowExisting] = useState(false);
 
   const [formData, setFormData] = useState({
@@ -552,7 +569,7 @@ export default function PostBusinessNeed() {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {existingNeeds.map((need: any, index: number) => (
+                {existingNeeds.map((need: BusinessNeed, index: number) => (
                   <TableRow key={index}>
                     <TableCell>
                       <Typography variant="body1" fontWeight="bold">

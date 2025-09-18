@@ -55,14 +55,56 @@ function TabPanel({ children, value, index }: TabPanelProps) {
   );
 }
 
+interface User {
+  userID: string;
+  companyCode: string;
+}
+
+interface Product {
+  id: number;
+  name: string;
+  sku: string;
+  moq: number;
+  price: number;
+  unit: string;
+  description: string;
+  category: string;
+  hsCode: string;
+}
+
+interface TopProduct {
+  name: string;
+  views: number;
+  partnerSchedule?: string;
+}
+
+interface Statistics {
+  topProducts?: TopProduct[];
+}
+
+interface Profile {
+  [key: string]: unknown;
+}
+
+interface Metrics {
+  [key: string]: unknown;
+}
+
+interface StoreData {
+  products?: Product[];
+  profile?: Profile;
+  metrics?: Metrics;
+  statistics?: Statistics;
+}
+
 export default function StoreManagement() {
   const router = useRouter();
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState<User | null>(null);
   const [tabValue, setTabValue] = useState(0);
-  const [storeData, setStoreData] = useState<any>(null);
+  const [storeData, setStoreData] = useState<StoreData | null>(null);
   const [loading, setLoading] = useState(false);
   const [productDialog, setProductDialog] = useState(false);
-  const [editingProduct, setEditingProduct] = useState<any>(null);
+  const [editingProduct, setEditingProduct] = useState<Product | null>(null);
 
   const [companyForm, setCompanyForm] = useState({
     companyName: '',
@@ -207,7 +249,7 @@ export default function StoreManagement() {
     }
   };
 
-  const handleProductEdit = (product: any) => {
+  const handleProductEdit = (product: Product) => {
     setEditingProduct(product);
     setProductForm({
       name: product.name,
@@ -397,7 +439,7 @@ export default function StoreManagement() {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {storeData.products?.map((product: any) => (
+                {storeData.products?.map((product: Product) => (
                   <TableRow key={product.id}>
                     <TableCell>{product.name}</TableCell>
                     <TableCell>{product.sku}</TableCell>
@@ -615,7 +657,7 @@ export default function StoreManagement() {
                       </TableRow>
                     </TableHead>
                     <TableBody>
-                      {storeData.statistics?.topProducts?.map((product: any, index: number) => (
+                      {storeData.statistics?.topProducts?.map((product: TopProduct, index: number) => (
                         <TableRow key={index}>
                           <TableCell>{product.name}</TableCell>
                           <TableCell>{product.views}</TableCell>

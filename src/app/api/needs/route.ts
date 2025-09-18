@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-let businessNeeds = [
+const businessNeeds = [
   {
     id: 1,
     type: "buy",
