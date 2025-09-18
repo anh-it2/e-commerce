@@ -265,8 +265,8 @@ export default function StoreManagement() {
         </Tabs>
 
         <TabPanel value={tabValue} index={0}>
-          <Grid container spacing={3} class='p-2 w-2xl'>
-            <Grid item xs={12} md={6}>
+          <Box sx={{ display: 'flex', justifyContent: 'center', width: '100%', py: 3 }}>
+            <Box sx={{ width: '100%', maxWidth: '600px', px: 2 }}>
               <TextField
                 fullWidth
                 label="Company Name"
@@ -278,7 +278,7 @@ export default function StoreManagement() {
                 fullWidth
                 label="Description"
                 multiline
-                rows={3}
+                rows={4}
                 value={companyForm.description}
                 onChange={(e) => setCompanyForm({...companyForm, description: e.target.value})}
                 margin="normal"
@@ -290,8 +290,6 @@ export default function StoreManagement() {
                 onChange={(e) => setCompanyForm({...companyForm, address: e.target.value})}
                 margin="normal"
               />
-            </Grid>
-            <Grid item xs={12} md={6}>
               <TextField
                 fullWidth
                 label="Phone"
@@ -314,56 +312,63 @@ export default function StoreManagement() {
                 onChange={(e) => setCompanyForm({...companyForm, website: e.target.value})}
                 margin="normal"
               />
-              <Button
-                variant="contained"
-                onClick={handleCompanyUpdate}
-                disabled={loading}
-              >
-                Update Company Info
-              </Button>
-            </Grid>
-          </Grid>
+              <Box sx={{ display: 'flex', justifyContent: 'center', mt: 3 }}>
+                <Button
+                  variant="contained"
+                  onClick={handleCompanyUpdate}
+                  disabled={loading}
+                  size="large"
+                >
+                  Update Company Info
+                </Button>
+              </Box>
+            </Box>
+          </Box>
         </TabPanel>
 
         <TabPanel value={tabValue} index={1}>
-          <Grid container spacing={3}>
-            <Grid item xs={12} md={6}>
-              <Card>
-                <CardContent>
-                  <Typography variant="h6" gutterBottom>
-                    Company Logo
-                  </Typography>
-                  <Box sx={{ textAlign: 'center', p: 3, border: '2px dashed #ccc', borderRadius: 2 }}>
-                    <UploadIcon sx={{ fontSize: 48, color: 'text.secondary' }} />
-                    <Typography variant="body2" color="text.secondary">
-                      Upload company logo (JPG, PNG, max 2MB)
-                    </Typography>
-                    <Button variant="outlined" sx={{ mt: 2 }}>
-                      Choose File
-                    </Button>
-                  </Box>
-                </CardContent>
-              </Card>
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <Card>
-                <CardContent>
-                  <Typography variant="h6" gutterBottom>
-                    Product Images
-                  </Typography>
-                  <Box sx={{ textAlign: 'center', p: 3, border: '2px dashed #ccc', borderRadius: 2 }}>
-                    <UploadIcon sx={{ fontSize: 48, color: 'text.secondary' }} />
-                    <Typography variant="body2" color="text.secondary">
-                      Upload product images (Multiple files allowed)
-                    </Typography>
-                    <Button variant="outlined" sx={{ mt: 2 }}>
-                      Choose Files
-                    </Button>
-                  </Box>
-                </CardContent>
-              </Card>
-            </Grid>
-          </Grid>
+          <Box sx={{ display: 'flex', justifyContent: 'center', width: '100%', py: 3 }}>
+            <Box sx={{ width: '100%', maxWidth: '800px', px: 2 }}>
+              <Grid container spacing={3}>
+                <Grid item xs={12}>
+                  <Card>
+                    <CardContent>
+                      <Typography variant="h6" gutterBottom>
+                        Company Logo
+                      </Typography>
+                      <Box sx={{ textAlign: 'center', p: 4, border: '2px dashed #ccc', borderRadius: 2 }}>
+                        <UploadIcon sx={{ fontSize: 48, color: 'text.secondary' }} />
+                        <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+                          Upload company logo (JPG, PNG, max 2MB)
+                        </Typography>
+                        <Button variant="outlined" size="large">
+                          Choose File
+                        </Button>
+                      </Box>
+                    </CardContent>
+                  </Card>
+                </Grid>
+                <Grid item xs={12}>
+                  <Card>
+                    <CardContent>
+                      <Typography variant="h6" gutterBottom>
+                        Product Images
+                      </Typography>
+                      <Box sx={{ textAlign: 'center', p: 4, border: '2px dashed #ccc', borderRadius: 2 }}>
+                        <UploadIcon sx={{ fontSize: 48, color: 'text.secondary' }} />
+                        <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+                          Upload product images (Multiple files allowed)
+                        </Typography>
+                        <Button variant="outlined" size="large">
+                          Choose Files
+                        </Button>
+                      </Box>
+                    </CardContent>
+                  </Card>
+                </Grid>
+              </Grid>
+            </Box>
+          </Box>
         </TabPanel>
 
         <TabPanel value={tabValue} index={2}>
@@ -436,8 +441,8 @@ export default function StoreManagement() {
         </TabPanel>
 
         <TabPanel value={tabValue} index={3}>
-          <Grid container spacing={3}>
-            <Grid item xs={12} md={6}>
+          <Box sx={{ display: 'flex', justifyContent: 'center', width: '100%', py: 3 }}>
+            <Box sx={{ width: '100%', maxWidth: '600px', px: 2 }}>
               <FormControl fullWidth margin="normal">
                 <InputLabel>Payment Methods</InputLabel>
                 <Select
@@ -462,13 +467,11 @@ export default function StoreManagement() {
                 fullWidth
                 label="Shipping Policy"
                 multiline
-                rows={3}
+                rows={4}
                 value={policyForm.shipping}
                 onChange={(e) => setPolicyForm({...policyForm, shipping: e.target.value})}
                 margin="normal"
               />
-            </Grid>
-            <Grid item xs={12} md={6}>
               <TextField
                 fullWidth
                 label="Warranty Policy"
@@ -480,22 +483,23 @@ export default function StoreManagement() {
                 fullWidth
                 label="Returns Policy"
                 multiline
-                rows={3}
+                rows={4}
                 value={policyForm.returns}
                 onChange={(e) => setPolicyForm({...policyForm, returns: e.target.value})}
                 margin="normal"
               />
-            </Grid>
-            <Grid item xs={12}>
-              <Button
-                variant="contained"
-                onClick={handlePolicyUpdate}
-                disabled={loading}
-              >
-                Update Policy
-              </Button>
-            </Grid>
-          </Grid>
+              <Box sx={{ display: 'flex', justifyContent: 'center', mt: 3 }}>
+                <Button
+                  variant="contained"
+                  onClick={handlePolicyUpdate}
+                  disabled={loading}
+                  size="large"
+                >
+                  Update Policy
+                </Button>
+              </Box>
+            </Box>
+          </Box>
         </TabPanel>
 
         <TabPanel value={tabValue} index={4}>
@@ -639,83 +643,78 @@ export default function StoreManagement() {
           {editingProduct ? 'Edit Product' : 'Add New Product'}
         </DialogTitle>
         <DialogContent>
-          <Grid container spacing={2} sx={{ mt: 1 }}>
-            <Grid item xs={12} md={6}>
-              <TextField
-                fullWidth
-                label="Product Name"
-                value={productForm.name}
-                onChange={(e) => setProductForm({...productForm, name: e.target.value})}
-              />
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <TextField
-                fullWidth
-                label="SKU"
-                value={productForm.sku}
-                onChange={(e) => setProductForm({...productForm, sku: e.target.value})}
-              />
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <TextField
-                fullWidth
-                label="Category"
-                value={productForm.category}
-                onChange={(e) => setProductForm({...productForm, category: e.target.value})}
-              />
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <TextField
-                fullWidth
-                label="HS Code"
-                value={productForm.hsCode}
-                onChange={(e) => setProductForm({...productForm, hsCode: e.target.value})}
-              />
-            </Grid>
-            <Grid item xs={12} md={4}>
-              <TextField
-                fullWidth
-                label="MOQ"
-                type="number"
-                value={productForm.moq}
-                onChange={(e) => setProductForm({...productForm, moq: e.target.value})}
-              />
-            </Grid>
-            <Grid item xs={12} md={4}>
-              <TextField
-                fullWidth
-                label="Price"
-                type="number"
-                value={productForm.price}
-                onChange={(e) => setProductForm({...productForm, price: e.target.value})}
-              />
-            </Grid>
-            <Grid item xs={12} md={4}>
-              <TextField
-                fullWidth
-                label="Unit"
-                value={productForm.unit}
-                onChange={(e) => setProductForm({...productForm, unit: e.target.value})}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                fullWidth
-                label="Description"
-                multiline
-                rows={3}
-                value={productForm.description}
-                onChange={(e) => setProductForm({...productForm, description: e.target.value})}
-              />
-            </Grid>
-          </Grid>
+          <Box sx={{ py: 2 }}>
+            <TextField
+              fullWidth
+              label="Product Name"
+              value={productForm.name}
+              onChange={(e) => setProductForm({...productForm, name: e.target.value})}
+              margin="normal"
+            />
+            <TextField
+              fullWidth
+              label="SKU"
+              value={productForm.sku}
+              onChange={(e) => setProductForm({...productForm, sku: e.target.value})}
+              margin="normal"
+            />
+            <TextField
+              fullWidth
+              label="Category"
+              value={productForm.category}
+              onChange={(e) => setProductForm({...productForm, category: e.target.value})}
+              margin="normal"
+            />
+            <TextField
+              fullWidth
+              label="HS Code"
+              value={productForm.hsCode}
+              onChange={(e) => setProductForm({...productForm, hsCode: e.target.value})}
+              margin="normal"
+            />
+            <TextField
+              fullWidth
+              label="Unit"
+              value={productForm.unit}
+              onChange={(e) => setProductForm({...productForm, unit: e.target.value})}
+              margin="normal"
+            />
+            <TextField
+              fullWidth
+              label="MOQ"
+              type="number"
+              value={productForm.moq}
+              onChange={(e) => setProductForm({...productForm, moq: e.target.value})}
+              margin="normal"
+            />
+            <TextField
+              fullWidth
+              label="Price"
+              type="number"
+              value={productForm.price}
+              onChange={(e) => setProductForm({...productForm, price: e.target.value})}
+              margin="normal"
+            />
+            <TextField
+              fullWidth
+              label="Description"
+              multiline
+              rows={4}
+              value={productForm.description}
+              onChange={(e) => setProductForm({...productForm, description: e.target.value})}
+              margin="normal"
+            />
+          </Box>
         </DialogContent>
-        <DialogActions>
-          <Button onClick={() => setProductDialog(false)}>Cancel</Button>
+        <DialogActions sx={{ px: 3, pb: 3 }}>
+          <Button onClick={() => setProductDialog(false)} size="large">
+            Cancel
+          </Button>
           <Button
             onClick={handleProductSubmit}
             variant="contained"
             disabled={loading}
+            size="large"
           >
             {editingProduct ? 'Update' : 'Add'} Product
           </Button>
