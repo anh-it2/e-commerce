@@ -27,7 +27,8 @@ import {
   AccountBalance as FinanceIcon,
   Business as BusinessIcon,
   NavigateNext as NavigateNextIcon,
-  Home as HomeIcon
+  Home as HomeIcon,
+  Storefront as StorefrontIcon
 } from '@mui/icons-material';
 
 const drawerWidth = 280;
@@ -63,6 +64,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
     { id: 'needs', label: 'Post Business Need', icon: <PostAddIcon />, path: '/dashboard/needs' },
     { id: 'partners', label: 'Find Partners', icon: <PeopleIcon />, path: '/dashboard/partners' },
     { id: 'finance', label: 'Financial Services', icon: <FinanceIcon />, path: '/dashboard/finance' },
+    { id: 'public-marketplace', label: 'Gian hàng công khai', icon: <StorefrontIcon />, path: '/dashboard/gian-hang-cong-khai' },
   ];
 
   const handleMenuClick = (path: string) => {
