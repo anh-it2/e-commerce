@@ -122,7 +122,9 @@ export default function CompanyInfo() {
   };
 
   const handleCancel = () => {
-    setFormData(companyData);
+    if (companyData) {
+      setFormData(companyData);
+    }
     setEditMode(false);
   };
 
