@@ -265,7 +265,7 @@ export default function StoreManagement() {
         </Tabs>
 
         <TabPanel value={tabValue} index={0}>
-          <Grid container spacing={3}>
+          <Grid container spacing={3} class='p-2 w-2xl'>
             <Grid item xs={12} md={6}>
               <TextField
                 fullWidth
@@ -314,8 +314,6 @@ export default function StoreManagement() {
                 onChange={(e) => setCompanyForm({...companyForm, website: e.target.value})}
                 margin="normal"
               />
-            </Grid>
-            <Grid item xs={12}>
               <Button
                 variant="contained"
                 onClick={handleCompanyUpdate}

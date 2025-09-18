@@ -56,7 +56,7 @@ export default function DashboardContent() {
 
   return (
     <Box>
-      <Grid container spacing={3}>
+      <Grid container spacing={2}>
         {/* Quick Stats */}
         <Grid item xs={12} sm={6} md={3}>
           <Card sx={{ height: '100%' }}>
@@ -152,8 +152,9 @@ export default function DashboardContent() {
           </Grid>
         )}
 
-        {/* Main Content Grid */}
-        <Grid item xs={12} md={8}>
+        {/* Left Column */}
+        <Grid item xs={12} sm={6}>
+          {/* Quick Actions Section */}
           <Paper sx={{ p: 3, mb: 3 }}>
             <Typography variant="h6" gutterBottom>
               Quick Actions
@@ -206,12 +207,13 @@ export default function DashboardContent() {
             </Grid>
           </Paper>
 
-          <Paper sx={{ p: 3 }}>
+          {/* Recent Activities Section */}
+          <Paper sx={{ p: 3, mb: 3 }}>
             <Typography variant="h6" gutterBottom>
               Recent Activities
             </Typography>
             <TableContainer>
-              <Table>
+              <Table size="small">
                 <TableHead>
                   <TableRow>
                     <TableCell>Activity</TableCell>
@@ -243,24 +245,8 @@ export default function DashboardContent() {
               </Table>
             </TableContainer>
           </Paper>
-        </Grid>
 
-        {/* Right Sidebar */}
-        <Grid item xs={12} md={4}>
-          <Paper sx={{ p: 3, mb: 3 }} elevation={2}>
-            <Typography variant="h6" gutterBottom sx={{ display: 'flex', alignItems: 'center' }}>
-              <CalendarToday sx={{ mr: 1 }} />
-              Upcoming Events
-            </Typography>
-            {dashboardData.upcomingEvents?.map((event: string, index: number) => (
-              <Box key={index} sx={{ mb: 1, p: 2, bgcolor: 'background.default', borderRadius: 1, borderLeft: 3, borderColor: 'primary.main' }}>
-                <Typography variant="body2">
-                  {event}
-                </Typography>
-              </Box>
-            ))}
-          </Paper>
-
+          {/* Performance Metrics Section */}
           <Paper sx={{ p: 3 }} elevation={2}>
             <Typography variant="h6" gutterBottom sx={{ display: 'flex', alignItems: 'center' }}>
               <TrendingUp sx={{ mr: 1 }} />
@@ -278,6 +264,88 @@ export default function DashboardContent() {
               <Typography variant="body2" color="text.secondary">Average Response Time</Typography>
               <Typography variant="h6" color="info.main">2.3 hours</Typography>
             </Box>
+          </Paper>
+        </Grid>
+
+        {/* Right Column */}
+        <Grid item xs={12} sm={6}>
+          {/* Meeting Schedule Section */}
+          <Paper sx={{ p: 3, mb: 3 }}>
+            <Typography variant="h6" gutterBottom sx={{ display: 'flex', alignItems: 'center' }}>
+              <CalendarToday sx={{ mr: 1 }} />
+              Meeting Schedule
+            </Typography>
+            <Box sx={{ maxHeight: 400, overflowY: 'auto' }}>
+              {dashboardData.upcomingMeetings?.map((meeting: any, index: number) => (
+                <Box key={index} sx={{ mb: 2, p: 2, bgcolor: 'background.default', borderRadius: 1, borderLeft: 3, borderColor: 'primary.main' }}>
+                  <Typography variant="body2" fontWeight="bold">
+                    {meeting.partner || `Partner ${index + 1}`}
+                  </Typography>
+                  <Typography variant="caption" color="text.secondary">
+                    {meeting.date || '2024-01-15'} at {meeting.time || '10:00 AM'}
+                  </Typography>
+                  <Typography variant="body2" sx={{ mt: 1 }}>
+                    {meeting.topic || 'Business Discussion'}
+                  </Typography>
+                  <Chip
+                    label={meeting.status || 'Confirmed'}
+                    size="small"
+                    color={meeting.status === 'Confirmed' ? 'success' : 'warning'}
+                    sx={{ mt: 1 }}
+                  />
+                </Box>
+              )) || (
+                // Default meetings if no data
+                <>
+                  <Box sx={{ mb: 2, p: 2, bgcolor: 'background.default', borderRadius: 1, borderLeft: 3, borderColor: 'primary.main' }}>
+                    <Typography variant="body2" fontWeight="bold">ABC Trading Co.</Typography>
+                    <Typography variant="caption" color="text.secondary">Today at 2:00 PM</Typography>
+                    <Typography variant="body2" sx={{ mt: 1 }}>Partnership Discussion</Typography>
+                    <Chip label="Confirmed" size="small" color="success" sx={{ mt: 1 }} />
+                  </Box>
+                  <Box sx={{ mb: 2, p: 2, bgcolor: 'background.default', borderRadius: 1, borderLeft: 3, borderColor: 'warning.main' }}>
+                    <Typography variant="body2" fontWeight="bold">XYZ Manufacturing</Typography>
+                    <Typography variant="caption" color="text.secondary">Tomorrow at 10:00 AM</Typography>
+                    <Typography variant="body2" sx={{ mt: 1 }}>Supply Chain Meeting</Typography>
+                    <Chip label="Pending" size="small" color="warning" sx={{ mt: 1 }} />
+                  </Box>
+                  <Box sx={{ mb: 2, p: 2, bgcolor: 'background.default', borderRadius: 1, borderLeft: 3, borderColor: 'primary.main' }}>
+                    <Typography variant="body2" fontWeight="bold">Global Exports Ltd.</Typography>
+                    <Typography variant="caption" color="text.secondary">Jan 18 at 11:00 AM</Typography>
+                    <Typography variant="body2" sx={{ mt: 1 }}>Export Strategy</Typography>
+                    <Chip label="Confirmed" size="small" color="success" sx={{ mt: 1 }} />
+                  </Box>
+                </>
+              )}
+            </Box>
+          </Paper>
+
+          {/* Upcoming Events Section */}
+          <Paper sx={{ p: 3 }} elevation={2}>
+            <Typography variant="h6" gutterBottom sx={{ display: 'flex', alignItems: 'center' }}>
+              <CalendarToday sx={{ mr: 1 }} />
+              Upcoming Events
+            </Typography>
+            {dashboardData.upcomingEvents?.map((event: string, index: number) => (
+              <Box key={index} sx={{ mb: 1, p: 2, bgcolor: 'background.default', borderRadius: 1, borderLeft: 3, borderColor: 'primary.main' }}>
+                <Typography variant="body2">
+                  {event}
+                </Typography>
+              </Box>
+            )) || (
+              // Default events if no data
+              <>
+                <Box sx={{ mb: 1, p: 2, bgcolor: 'background.default', borderRadius: 1, borderLeft: 3, borderColor: 'primary.main' }}>
+                  <Typography variant="body2">Quarterly Business Review - Jan 20</Typography>
+                </Box>
+                <Box sx={{ mb: 1, p: 2, bgcolor: 'background.default', borderRadius: 1, borderLeft: 3, borderColor: 'primary.main' }}>
+                  <Typography variant="body2">Trade Fair Expo - Jan 25</Typography>
+                </Box>
+                <Box sx={{ mb: 1, p: 2, bgcolor: 'background.default', borderRadius: 1, borderLeft: 3, borderColor: 'primary.main' }}>
+                  <Typography variant="body2">Client Presentation - Jan 30</Typography>
+                </Box>
+              </>
+            )}
           </Paper>
         </Grid>
       </Grid>
